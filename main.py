@@ -63,6 +63,9 @@ def create_popup_window(title: str, geometry: str):
     popup = Toplevel(root)
     popup.title(title)
 
+    popup.grab_set()  # Set grab on the new window
+    popup.protocol("WM_DELETE_WINDOW", lambda: release_grab(popup))
+
     # Use the same color as main window
     popup.configure(bg='#212121')
     popup.geometry(geometry)
@@ -83,6 +86,10 @@ def create_popup_window(title: str, geometry: str):
     popup.focus_set()
 
     return popup
+
+
+def release_grab(window):
+    window.grab_release()  # Release the grab on the window
 
 
 def add_message_label(popup, text: str, pady=1, padx=1, wraplength=250):
