@@ -179,8 +179,7 @@ def dev_list():
 
 
 def is_valid_filename(filename):
-    return filename.lower().endswith('.bin') \
-        or filename.lower().endswith('.hex')
+    return filename.lower().endswith('.bin')
 
 
 def browse_files():
@@ -188,7 +187,7 @@ def browse_files():
     file_path = filedialog.askopenfilename(
         initialdir="/",
         title="Select a File",
-        filetypes=(("Device firmware", "*.bin *.hex"),)
+        filetypes=(("Device firmware", "*.bin"),)
     )
 
     if file_path and is_valid_filename(file_path):
