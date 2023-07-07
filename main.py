@@ -18,8 +18,14 @@ sw_filename = ""
 def get_devices_list(vid: Optional[int] = None, pid: Optional[int] = None) -> []:
     devices_list = []
 
+    for device in list(usb.core.find(find_all=True, idProduct=22315)):
+        dev_name = "Keyboard: Bus {} Device {:03d}: ID {:04x}:{:04x}".format(
+            device.bus, device.address, device.idVendor, device.idProduct
+        )
+        devices_list.append(dev_name)
+
     for device in _get_dfu_devices(vid=vid, pid=pid):
-        dev_name = "Bus {} Device {:03d}: ID {:04x}:{:04x}".format(
+        dev_name = "Keyboard DFU: Bus {} Device {:03d}: ID {:04x}:{:04x}".format(
             device.bus, device.address, device.idVendor, device.idProduct
         )
         devices_list.append(dev_name)
